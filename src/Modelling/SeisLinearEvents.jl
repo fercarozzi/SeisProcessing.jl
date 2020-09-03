@@ -32,11 +32,11 @@ julia> d = SeisLinearEvents(); SeisPlotTX(d);
 ```
 Credits: Aaron Stanton, 2015
 """
-function SeisLinearEvents(; ot=0.0, dt=0.004, nt=500, ox1=0.0, dx1=10.0,
-                          nx1=100, ox2=0.0, dx2=10.0, nx2=1, ox3=0.0, dx3=10.0,
-                          nx3=1, ox4=0.0, dx4=10.0, nx4=1, tau=[1.0,1.5],
-                          p1=[0.0001,-0.0003],p2=[0.,0.],p3=[0.,0],p4=[0.,0.],
-                          amp=[1.0,-1.0], f0=20.0)
+function SeisLinearEvents(; ot::Tf=0.0, dt::Tf=0.004, nt::Ti=500, ox1::Tf=0.0, dx1::Tf=10.0,
+                          nx1::Ti=100, ox2::Tf=0.0, dx2::Tf=10.0, nx2::Ti=1, ox3::Tf=0.0, dx3::Tf=10.0,
+                          nx3::Ti=1, ox4::Tf=0.0, dx4::Tf=10.0, nx4::Ti=1, tau::Vector{Tf}=[1.0,1.5],
+                          p1::Vector{Tf}=[0.0001,-0.0003],p2::Vector{Tf}=[0.,0.],p3::Vector{Tf}=[0.,0],p4::Vector{Tf}=[0.,0.],
+                          amp::Vector{Tf}=[1.0,-1.0], f0::Tf=20.0) where {Ti<:Int, Tf<:AbstractFloat}
 
 
     w = Ricker(dt=dt,f0=f0);
@@ -45,10 +45,10 @@ function SeisLinearEvents(; ot=0.0, dt=0.004, nt=500, ox1=0.0, dx1=10.0,
     t_delay = (nw-1)*dt/2;
     w = vcat(w, zeros(nf-nw));
     W = fft(w);
-    x1 =ox1 .+ collect(0:1:nx1-1)*dx1;
-    x2 =ox2 .+ collect(0:1:nx2-1)*dx2;
-    x3 =ox3 .+ collect(0:1:nx3-1)*dx3;
-    x4 =ox4 .+ collect(0:1:nx4-1)*dx4;
+    x1 = ox1 .+ collect(0:1:nx1-1)*dx1;
+    x2 = ox2 .+ collect(0:1:nx2-1)*dx2;
+    x3 = ox3 .+ collect(0:1:nx3-1)*dx3;
+    x4 = ox4 .+ collect(0:1:nx4-1)*dx4;
     n_events = length(p1);
     d = zeros(Float64, nt, nx1, nx2, nx3, nx4);
     D = zeros(Complex{Float64}, nf, nx1, nx2, nx3, nx4);
