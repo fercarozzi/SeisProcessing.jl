@@ -21,7 +21,7 @@ a Hamming window.
 julia> w = Ormsby(); plot(w);
 ```
 """
-function Ormsby(; dt=0.002, f=[2.0, 10.0, 40.0, 60.0])
+function Ormsby(; dt::Tf=0.002, f::Vector{Tr}=[2.0, 10.0, 40.0, 60.0]) where {Tf<:AbstractFloat, Tr<:Real}
 
     f1 = f[1]
     f2 = f[2]
@@ -38,10 +38,12 @@ function Ormsby(; dt=0.002, f=[2.0, 10.0, 40.0, 60.0])
     a2 = (pi*f2)^2/(pi*(f2-f1))
     a1 = (pi*f1)^2/(pi*(f2-f1))
 
-    u = a4*(sinc.(f4*t)).^2 - a3*(sinc.(f3*t)).^2
-    v = a2*(sinc.(f2*t)).^2 - a1*(sinc.(f1*t)).^2
+    u = [ a4 * (sinc(f4 * t[i] ))^2 - a3 * (sinc(f3 * t[i] ))^2 for i in eachindex(t) ]
+    v = [ a2 * (sinc(f2 * t[i] ))^2 - a1 * (sinc(f1 * t[i] ))^2 for i in eachindex(t) ]
 
-    w = u - v
-    w = w.*Hamming(nw)/maximum(w)
+    w  = u - v
+    Hm = Hamming(nw) 
+    w  = [w[i] * Hm[i] for i in eachindex(w)]
+    w  = w/maximum(w)
 
 end
