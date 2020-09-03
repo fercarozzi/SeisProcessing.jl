@@ -17,7 +17,7 @@ julia> w = Berlage(); plot(w);
 **Reference**
 * Aldridge, David F., 1990, The berlage wavelet: GEOPHYSICS, 55, 1508--1511.
 """
-function Berlage(; dt::Tf=0.002, f0::Real=20.0, m::Real=2, alpha::Real=180.0,
+function Berlage(; dt::AbstractFloat=0.002, f0::Real=20.0, m::Real=2, alpha::Real=180.0,
                  phi0::Real=0.0)
 
     nw = floor(Int, 2.0/(f0*dt))
