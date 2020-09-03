@@ -4,8 +4,8 @@
 Create a Ricker wavelet.
 
 # Arguments
-* `dt=0.002`: sampling interval in secs.
-* `f0=20.0`: central frequency in Hz.
+* `dt::AbstractFloat=0.002`: sampling interval in secs.
+* `f0::Real=20.0`: central frequency in Hz.
 
 # Examples
 ```julia

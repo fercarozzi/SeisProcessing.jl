@@ -4,11 +4,11 @@
 Create a Berlage wavelet.
 
 # Arguments
-- `dt=0.002`: sampling interval in secs.
-- `f0=20.0`: central frequency in Hz.
+- `dt::AbstractFloat=0.002`: sampling interval in secs.
+- `f0::Real=20.0`: central frequency in Hz.
 - `m::Real=2`: exponential parameter of Berlage wavelet.
 - `alpha::Real=180.0`: alpha parameter of Berlage wavelet in rad/secs.
-- `phi0::Real`: phase rotation in radians.
+- `phi0::Real=0.0`: phase rotation in radians.
 
 # Example
 ```julia

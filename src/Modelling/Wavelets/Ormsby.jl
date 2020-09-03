@@ -7,7 +7,7 @@ a Hamming window.
 
 # Arguments
 - `dt::AbstractFloat=0.002`: sampling interval in secs.
-- `f::Vector{Real}=[2.0, 10.0, 40.0, 60.0]`: corner frequencies in Hz.
+- `f::Vector{AbstractFloat}=[2.0, 10.0, 40.0, 60.0]`: corner frequencies in Hz.
       ^
     1 |     ***************
       |    *               *
@@ -21,7 +21,7 @@ a Hamming window.
 julia> w = Ormsby(); plot(w);
 ```
 """
-function Ormsby(; dt::Tf=0.002, f::Vector{Tr}=[2.0, 10.0, 40.0, 60.0]) where {Tf<:AbstractFloat, Tr<:Real}
+function Ormsby(; dt::Tf=0.002, f::Vector{Tf}=[2.0, 10.0, 40.0, 60.0]) where {Tf<:AbstractFloat}
 
     f1,f2,f3,f4 = f
 
